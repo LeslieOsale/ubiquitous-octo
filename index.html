@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dear Anna...</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tangerine:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f9f7f7 0%, #f0ece4 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 20px;
+            color: #5a5a5a;
+        }
+        
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.92);
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            position: relative;
+            padding: 30px;
+        }
+        
+        .floral-border {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.15;
+        }
+        
+        .floral-corner {
+            position: absolute;
+            font-size: 80px;
+            color: #d4a5b3;
+        }
+        
+        .corner-1 {
+            top: -15px;
+            left: -5px;
+            transform: rotate(315deg);
+        }
+        
+        .corner-2 {
+            top: -15px;
+            right: -5px;
+            transform: rotate(45deg);
+        }
+        
+        .corner-3 {
+            bottom: -15px;
+            left: -5px;
+            transform: rotate(225deg);
+        }
+        
+        .corner-4 {
+            bottom: -15px;
+            right: -5px;
+            transform: rotate(135deg);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+            padding-top: 20px;
+        }
+        
+        h1 {
+            font-family: 'Tangerine', cursive;
+            font-size: 52px;
+            color: #d46a6a;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            font-style: italic;
+            color: #9d8189;
+            margin-bottom: 25px;
+            font-size: 18px;
+        }
+        
+        .message-container {
+            position: relative;
+            padding: 30px;
+            background: linear-gradient(to right, #fdfaf8 0%, #fefefe 100%);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
+        }
+        
+        .message {
+            font-family: 'Tangerine', cursive;
+            font-size: 32px;
+            line-height: 1.6;
+            color: #5a5a5a;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .message p {
+            margin-bottom: 25px;
+        }
+        
+        .floral-divider {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 25px 0;
+            opacity: 0.7;
+        }
+        
+        .divider-line {
+            height: 1px;
+            background: linear-gradient(to right, transparent, #d4a5b3, transparent);
+            flex-grow: 1;
+            max-width: 120px;
+        }
+        
+        .divider-flower {
+            margin: 0 15px;
+            color: #d46a6a;
+            font-size: 20px;
+        }
+        
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+        
+        .floating-element {
+            position: absolute;
+            opacity: 0.1;
+            color: #d46a6a;
+        }
+        
+        .el-1 {
+            top: 15%;
+            left: 10%;
+            font-size: 24px;
+            animation: float 12s ease-in-out infinite;
+        }
+        
+        .el-2 {
+            top: 65%;
+            right: 15%;
+            font-size: 30px;
+            animation: float 15s ease-in-out infinite;
+        }
+        
+        .el-3 {
+            bottom: 20%;
+            left: 20%;
+            font-size: 20px;
+            animation: float 18s ease-in-out infinite;
+        }
+        
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+            font-style: italic;
+            color: #9d8189;
+            font-size: 18px;
+        }
+        
+        .to-me-btn {
+            display: inline-block;
+            margin-top: 18px;
+            padding: 12px 28px;
+            background: linear-gradient(90deg, #7fa074 0%, #4e6e5d 100%);
+            color: #fff;
+            font-family: 'Segoe UI', sans-serif;
+            font-size: 18px;
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            box-shadow: 0 2px 8px rgba(60,80,60,0.08);
+            transition: background 0.2s, transform 0.2s;
+        }
+        .to-me-btn:hover {
+            background: linear-gradient(90deg, #4e6e5d 0%, #7fa074 100%);
+            transform: translateY(-2px) scale(1.04);
+        }
+        
+        /* Loader styles */
+        .custom-loader-bg {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(245,247,245,0.85);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.3s;
+        }
+        .custom-loader {
+            border: 8px solid #e8eceb;
+            border-top: 8px solid #7fa074;
+            border-radius: 50%;
+            width: 70px;
+            height: 70px;
+            animation: spin 1s linear infinite;
+            box-shadow: 0 0 18px #7fa07444;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-15px) rotate(5deg);
+            }
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .message {
+                font-size: 28px;
+            }
+            
+            h1 {
+                font-size: 42px;
+            }
+            
+            .container {
+                padding: 20px;
+            }
+            
+            .message-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="floral-border">
+            <div class="floral-corner corner-1"><i class="fas fa-leaf"></i></div>
+            <div class="floral-corner corner-2"><i class="fas fa-leaf"></i></div>
+            <div class="floral-corner corner-3"><i class="fas fa-leaf"></i></div>
+            <div class="floral-corner corner-4"><i class="fas fa-leaf"></i></div>
+        </div>
+        
+        <div class="header">
+            <h1>Dear Anna...</h1>
+            <div class="subtitle">A gentle reminder in delicate moments</div>
+        </div>
+        
+        <div class="message-container">
+            <div class="floating-elements">
+                <div class="floating-element el-1"><i class="fas fa-heart"></i></div>
+                <div class="floating-element el-2"><i class="fas fa-feather-alt"></i></div>
+                <div class="floating-element el-3"><i class="fas fa-seedling"></i></div>
+            </div>
+            
+            <div class="message">
+                <p>I know things have been heavy for you lately, and I can only imagine the weight you've been carrying. Life can feel overwhelming at times, and it's natural to need space to process, reflect, and find your balance.</p>
+                
+                <div class="floral-divider">
+                    <div class="divider-line"></div>
+                    <div class="divider-flower"><i class="fas fa-circle"></i></div>
+                    <div class="divider-line"></div>
+                </div>
+                
+                <p>I respect your feelings and the decisions you make for yourself, and I want you to feel supported in whatever path you choose. No matter the pace or the distance, I hope this time gives you clarity and peace.</p>
+                
+                <div class="floral-divider">
+                    <div class="divider-line"></div>
+                    <div class="divider-flower"><i class="fas fa-circle"></i></div>
+                    <div class="divider-line"></div>
+                </div>
+                
+                <p>Whatever happens between us, I hope you can move forward knowing that you are understood and respected. I'll give you the space you need without expecting anything in return, trusting that you'll do what feels right for you.</p>
+                
+                <div class="floral-divider">
+                    <div class="divider-line"></div>
+                    <div class="divider-flower"><i class="fas fa-circle"></i></div>
+                    <div class="divider-line"></div>
+                </div>
+                
+                <p>I just wanted to share this so you know that your journey matters, your choices matter, and that there's someone who sees and respects all of it, quietly standing aside while you navigate your own path.</p>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>yours loving, Osale.</p>
+            <a href="me.html" class="to-me-btn">Special Vault</a>
+        </div>
+    </div>
+    
+    <div id="customLoaderBg" class="custom-loader-bg" style="display:none;">
+        <div class="custom-loader"></div>
+    </div>
+    
+    <script>
+        // Loader logic for all buttons with links
+        document.addEventListener('DOMContentLoaded', function() {
+            function showLoaderAndDelay(href) {
+                document.getElementById('customLoaderBg').style.display = 'flex';
+                setTimeout(function() {
+                    window.location.href = href;
+                }, 2500);
+            }
+            document.querySelectorAll('a.to-me-btn').forEach(function(btn) {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    showLoaderAndDelay(this.getAttribute('href'));
+                });
+            });
+        });
+        
+        // Add subtle interactive effect
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.querySelector('.container');
+            
+            container.addEventListener('mousemove', function(e) {
+                const x = e.clientX / window.innerWidth;
+                const y = e.clientY / window.innerHeight;
+                
+                const elements = document.querySelectorAll('.floating-element');
+                elements.forEach(el => {
+                    const speed = parseInt(el.style.fontSize) / 10;
+                    el.style.transform = `translate(${x * speed}px, ${y * speed}px)`;
+                });
+            });
+        });
+    </script>
+</body>
+</html>
