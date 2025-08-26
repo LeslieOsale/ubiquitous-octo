@@ -263,6 +263,91 @@
             transform: translateY(-2px) scale(1.04);
         }
         
+        /* Floating button */
+        .floating-btn {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            z-index: 1001;
+            background: linear-gradient(90deg, #4e6e5d 0%, #7fa074 100%);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 62px;
+            height: 62px;
+            box-shadow: 0 4px 18px #4e6e5d33;
+            font-size: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+        }
+        .floating-btn:hover {
+            background: linear-gradient(90deg, #7fa074 0%, #4e6e5d 100%);
+            transform: scale(1.08);
+        }
+        /* Terminal modal */
+        .terminal-modal-bg {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(30,34,36,0.75);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+        .terminal-modal {
+            background: #23272e;
+            color: #b7c9a8;
+            border-radius: 10px;
+            box-shadow: 0 8px 32px #0008;
+            width: 95vw;
+            max-width: 400px;
+            padding: 0 0 24px 0;
+            font-family: 'Fira Mono', 'Consolas', monospace;
+            border: 2px solid #7fa074;
+            position: relative;
+        }
+        .terminal-bar {
+            background: #181a1b;
+            border-radius: 10px 10px 0 0;
+            padding: 10px 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .term-dot {
+            width: 10px; height: 10px; border-radius: 50%; display: inline-block;
+        }
+        .term-dot.red { background: #e06c75; }
+        .term-dot.yellow { background: #e5c07b; }
+        .term-dot.green { background: #98c379; }
+        .terminal-content {
+            padding: 24px 20px 0 20px;
+            font-size: 16px;
+            color: #b7c9a8;
+        }
+        .terminal-actions {
+            margin-top: 22px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+        }
+        .terminal-btn {
+            background: #7fa074;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 18px;
+            font-family: inherit;
+            font-size: 15px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .terminal-btn:hover {
+            background: #4e6e5d;
+        }
         @keyframes float {
             0% {
                 transform: translateY(0) rotate(0deg);
@@ -358,6 +443,27 @@
         </div>
     </div>
     
+    <button class="floating-btn" id="openTerminalModal" title="Enter Birthday Mode">
+        <i class="fas fa-terminal"></i>
+    </button>
+    <div class="terminal-modal-bg" id="terminalModalBg">
+        <div class="terminal-modal">
+            <div class="terminal-bar">
+                <span class="term-dot red"></span>
+                <span class="term-dot yellow"></span>
+                <span class="term-dot green"></span>
+                <span style="margin-left:12px; color:#b7c9a8; font-size:15px;">Terminal</span>
+            </div>
+            <div class="terminal-content">
+                <span style="color:#7fa074;">$</span> Are you sure you want to enter birthday mode?<br><br>
+                <div class="terminal-actions">
+                    <button class="terminal-btn" id="confirmTerminal">Yes</button>
+                    <button class="terminal-btn" id="cancelTerminal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <script>
         // Add subtle interactive effect
         document.addEventListener('DOMContentLoaded', function() {
@@ -386,6 +492,25 @@
                     const speed = parseInt(el.style.fontSize) / 10;
                     el.style.transform = `translate(${x * speed}px, ${y * speed}px)`;
                 });
+            });
+        });
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            var openBtn = document.getElementById('openTerminalModal');
+            var modalBg = document.getElementById('terminalModalBg');
+            var confirmBtn = document.getElementById('confirmTerminal');
+            var cancelBtn = document.getElementById('cancelTerminal');
+            openBtn.addEventListener('click', function() {
+                modalBg.style.display = 'flex';
+            });
+            cancelBtn.addEventListener('click', function() {
+                modalBg.style.display = 'none';
+            });
+            confirmBtn.addEventListener('click', function() {
+                modalBg.style.display = 'none';
+                setTimeout(function() {
+                    window.location.href = 'birthday.html';
+                }, 400);
             });
         });
     </script>
